@@ -1,6 +1,4 @@
 const url="https://api.dictionaryapi.dev/api/v2/entries/en/";
-
-
 //selctors
 const result=document.getElementById("result");
 const btn=document.getElementById("search-btn");
@@ -15,46 +13,25 @@ const mydiv=document.createElement('div');
 const searchbox=document.createElement('div');
 const search_btn=document.createElement('button');
 const myresult=document.createElement('div');
-
-
 showcard();
-
 function showcard(){
-
-
 mydiv.classList.add('container');
 mydiv.setAttribute('id','container');
-
-
 searchbox.classList.add("search-box");
 searchbox.innerHTML=`
 <input class="search-bar" type="text"  id="input-word" placeholder="Type here..">
 `
-
-
 search_btn.classList.add('search-btn');
 search_btn.setAttribute('id','search-btn');
 search_btn.innerHTML=` <i class="fa-solid fa-magnifying-glass"></i>`
 
 searchbox.append(search_btn);
-
-
 myresult.classList.add('result');
 myresult.setAttribute('id','result');
-
-
-
-
 mydiv.appendChild(searchbox);
 mydiv.appendChild(myresult);
 card_container.append(mydiv);
-
-
 search_btn.addEventListener('click',showresult);
-
-// search_btn.addEventListener('click',setToLocalStorage);
-
-
 
 }
 
@@ -68,17 +45,31 @@ function showresult() {
     const storedWordData=JSON.parse(localStorage.getItem(input));
 
     if(storedWordData){
-        showHistory(storedWordData);
 
-    //     myresult.innerHTML=`
-    //     <div class="word">
-    //     <h3>${word}</h3>
-    // </div>
-    // <div class="details">
-    //     <p class="word_meaning">
-    //        ${definition}
-    //     </p>
-    // </div>`
+
+        for (var i = 0; i < localStorage.length; ++i) {
+
+            var key = localStorage.key(i);
+
+            if(input === key){
+                console.log("yes");
+                var value = localStorage.getItem(key);
+                const defi=JSON.parse(value).meanings[0].definitions[0].definition;
+                
+                    myresult.innerHTML=`
+                    <div class="word">
+                    <h3>${key}</h3>
+                </div>
+                <div class="details">
+                    <p class="word_meaning">
+                       ${defi}
+                    </p>
+                </div>`
+            }
+            
+        }
+
+
 
     }else{
         fetch(`${url}${input}`)
@@ -89,7 +80,6 @@ function showresult() {
             
                 return response.json()})
             .then((data) => {
-                console.log(data);//new
                 localStorage.setItem(input, JSON.stringify(data[0])); 
                 myresult.innerHTML=`
                 <div class="word">
