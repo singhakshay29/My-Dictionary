@@ -70,19 +70,24 @@ function showresult() {
     if(storedWordData){
         showHistory(storedWordData);
 
-        myresult.innerHTML=`
-        <div class="word">
-        <h3>${word}</h3>
-    </div>
-    <div class="details">
-        <p class="word_meaning">
-           ${definition}
-        </p>
-    </div>`
+    //     myresult.innerHTML=`
+    //     <div class="word">
+    //     <h3>${word}</h3>
+    // </div>
+    // <div class="details">
+    //     <p class="word_meaning">
+    //        ${definition}
+    //     </p>
+    // </div>`
 
     }else{
         fetch(`${url}${input}`)
-            .then((response) => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Word not found");
+                  }
+            
+                return response.json()})
             .then((data) => {
                 console.log(data);//new
                 localStorage.setItem(input, JSON.stringify(data[0])); 
@@ -96,7 +101,9 @@ function showresult() {
                 </p>
             </div>
                 `
-            });
+            }).catch(error => {
+                throw error;
+              });
         } 
     }
 
