@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,500;0,700;1,300;1,700&display=swap');
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ae9cff;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    background-color: aquamarine;
+    justify-content: space-between;
+   
+}
+
+ .logo{
+    display: flex;
+ }
+ .logo h3{
+    font-family: 'Ubuntu', sans-serif;
+    font-style: italic;
+    padding-top: 10%;
+    margin-left: 1rem;
+ }
+ .logo img{
+    width: 120px;
+    height: 120px;
+ }
+ .history-btn {
+    width: 200px;
+    height: 40px;
+    margin: 2rem;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: black;
+    color: #fff;
+    border: none;
+    outline: none;
+ }
+
+ /* #card{
+  background-color: black;
+ } */
+
+ .container{
+   background-color: #fff;
+   width: 90vmin;
+   position: absolute;
+   border-radius: 10px;
+   transform: translate(-50%, -50%);
+   top: 50%;
+   left: 50%;
+   margin-top: 60px;
+   padding: 80px 50px;
+   box-shadow: 0 20px 40px rgba(38, 33, 61, 0.2);
+ }
+.search-box{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+.search-box input{
+    padding: 5px;
+    width: 70%;
+    border: none;
+    outline: none;
+    margin-top: 5px;
+    border-bottom: 3px solid #ae9cff;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.search-box button{
+    padding: 5px 0;
+    width: 15%;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: black;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+.result{
+    margin-top: 1rem;
+    position: relative;
+}
+
+.result h3{
+    font-size: 30px;
+    color: #1f194c;
+}
+
+.result .word{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 60px;
+}
+
+.result .details{
+    display: flex;
+    gap: 10px;
+    font-size: 15px;
+    margin: 5px 0 20px 0;
+}
+
+
+
+/* .history{
+    background-color: #1f194c;
+    display: flex;
+    border-radius: 10px;
+    margin-top: 80px;
+    padding: 80px 50px;
+    box-shadow: 0 20px 40px rgba(38, 33, 61, 0.2);
+  } */
+
+  .box{
+    width: 200px;
+    height: 300px;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    margin-top: 60px;
+    margin-left: 20px;
+    background-color: #fff;
+    box-shadow: 0 20px 40px rgba(38, 33, 61, 0.2);
+  }
+
+  .box h3{
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+
+  .box .description{
+    margin-bottom: 10px;
+    padding-top: 50px;
+  }
+
+  .box button{
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    border: none;
+    outline: none;
+    font-size: x-large;
+    cursor: pointer;
+  }
+
+
+  .history_card{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+  }
+
+  .hidden{
+    display: none;
+  }
