@@ -14,7 +14,7 @@ body {
 nav{
     display: flex;
     flex-direction: row;
-    background-color: aquamarine;
+    background-color: #9CFFAE;
     justify-content: space-between;
    
 }
@@ -31,6 +31,10 @@ nav{
  .logo img{
     width: 120px;
     height: 120px;
+    margin-left: 2rem;
+    border: none;
+    outline: none;
+    border-radius: 10px;
  }
  .history-btn {
     width: 200px;
@@ -96,6 +100,13 @@ nav{
     font-size: 30px;
     color: #1f194c;
 }
+.result .play{
+  font-size: large;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+}
 
 .result .word{
     display: flex;
@@ -110,28 +121,26 @@ nav{
     margin: 5px 0 20px 0;
 }
 
-
-
-/* .history{
-    background-color: #1f194c;
-    display: flex;
-    border-radius: 10px;
-    margin-top: 80px;
-    padding: 80px 50px;
-    box-shadow: 0 20px 40px rgba(38, 33, 61, 0.2);
-  } */
-
+.result .wordExample{
+  font-style: italic;
+  border-left: 5px solid #ae9cff;
+  margin-top: 30px;
+  padding-left: 20px;
+}
   .box{
     width: 200px;
     height: 300px;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 10px;
     padding: 20px;
     position: relative;
-    margin-top: 60px;
+    margin-top: 100px;
     margin-left: 20px;
-    background-color: #fff;
     box-shadow: 0 20px 40px rgba(38, 33, 61, 0.2);
+    color: #000;
+    font-family: 'Ubuntu', sans-serif;
+    font-style: italic;
+    background-color: #fff;
   }
 
   .box h3{
@@ -153,6 +162,7 @@ nav{
     outline: none;
     font-size: x-large;
     cursor: pointer;
+    
   }
 
 
@@ -160,8 +170,49 @@ nav{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 10px;
+
   }
 
-  .hidden{
-    display: none;
+
+  .heading{
+    display: flex;
+    justify-content: center;
+    margin-left: 100px;
+    /* background-image: url("CardBackground.png"); */
+  }
+  nav .heading{
+    font-size: 60px;
+  }
+
+  .homeScreenText{
+    position: absolute;
+    font-size: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    margin-top: 2rem;
+    text-decoration: underline;
+    width: 700px;
+    transform: translate(-50%, -50%);
+    top: 20%;
+    left: 50%;
+  }
+  .homeScreenText p{
+    text-align: center;
+  }
+
+  .historyScreenText{
+    position: absolute;
+    font-size: 30px;
+    font-family: 'Ubuntu', sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    margin: 2rem;
+    text-decoration: underline;
+    width: 250px;
+    transform: translate(-50%, -50%);
+    top: 20%;
+    left: 45%;
+    /* background-color: #fff; */
+    text-align: center;
   }

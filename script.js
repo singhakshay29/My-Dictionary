@@ -6,6 +6,7 @@ const card_container=document.getElementById("card");
 const all_historybtn=document.getElementById('history');
 const history_card=document.getElementById('history_card');
 const inputWord=document.getElementById("input-word");
+const sound=document.getElementById("sound");
 
 //setters and creation
 all_historybtn.textContent="History";
@@ -13,6 +14,11 @@ const mydiv=document.createElement('div');
 const searchbox=document.createElement('div');
 const search_btn=document.createElement('button');
 const myresult=document.createElement('div');
+const historyHeadingTex=document.createElement('div');
+historyHeadingTex.classList.add('historyScreenText');
+historyHeadingTex.innerText="Search History";
+
+
 showcard();
 function showcard(){
 mydiv.classList.add('container');
@@ -59,10 +65,13 @@ function showresult() {
                     myresult.innerHTML=`
                     <div class="word">
                     <h3>${key}</h3>
+                    <button class="play">
+                    <i class="fa-solid fa-play"></i>
+                    </button>
                 </div>
                 <div class="details">
                     <p class="word_meaning">
-                       ${defi}
+                    Meaning: ${defi}
                     </p>
                 </div>`
             }
@@ -84,17 +93,27 @@ function showresult() {
                 myresult.innerHTML=`
                 <div class="word">
                 <h3>${input}</h3>
+                <button onclick="playSound" class="play">
+                <i class="fa-solid fa-play"></i>
+                </button>
             </div>
             <div class="details">
                 <p class="word_meaning">
-                   ${data[0].meanings[0].definitions[0].definition}
+                Meaning: ${data[0].meanings[0].definitions[0].definition}
                 </p>
-            </div>
-                `
+                </div>
+                <p class="wordExample">
+                Example: ${data[0].meanings[0].definitions[0].example || "Not Available"}
+                </p>`;
+                sound.setAttribute("src", `${data[0].phonetics[0].audio}`);
+                console.log(sound);
             }).catch(error => {
                 throw error;
               });
         } 
+    }
+    function playSound(){
+        sound.play();
     }
 
 
@@ -147,10 +166,14 @@ function switchtab(){
     {
         all_historybtn.textContent='Home'
         showHistory();
+        document.querySelector(".homeScreenText").style.display='none';
+        history_card.appendChild(historyHeadingTex).style.display='block';
         card_container.style.display='none';
         document.getElementById('history_card').style.display='grid';
     }else if(all_historybtn.textContent==='Home'){
         all_historybtn.textContent='History';
+        document.querySelector(".homeScreenText").style.display='block';
+        history_card.appendChild(historyHeadingTex).style.display='none';
         showcard();
         document.getElementById('history_card').style.display='none';
         card_container.style.display='block';
