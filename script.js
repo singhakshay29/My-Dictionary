@@ -7,6 +7,7 @@ const all_historybtn=document.getElementById('history');
 const history_card=document.getElementById('history_card');
 const inputWord=document.getElementById("input-word");
 const sound=document.getElementById("sound");
+const playbtn=document.querySelector(".play");
 
 //setters and creation
 all_historybtn.textContent="History";
@@ -58,14 +59,16 @@ function showresult() {
             var key = localStorage.key(i);
 
             if(input === key){
-                console.log("yes");
                 var value = localStorage.getItem(key);
                 const defi=JSON.parse(value).meanings[0].definitions[0].definition;
+                const soundmp3=JSON.parse(value).phonetics[0].audio;
+                sound.setAttribute("src",soundmp3);
+                const example=JSON.parse(value).meanings[0].definitions[0].example;
                 
                     myresult.innerHTML=`
                     <div class="word">
                     <h3>${key}</h3>
-                    <button class="play">
+                    <button onclick="playSound()" class="play">
                     <i class="fa-solid fa-play"></i>
                     </button>
                 </div>
@@ -73,7 +76,11 @@ function showresult() {
                     <p class="word_meaning">
                     Meaning: ${defi}
                     </p>
-                </div>`
+                </div>
+                <p class="wordExample">
+                Example: ${example|| "Not Available"}
+                </p>`
+                
             }
             
         }
@@ -93,7 +100,7 @@ function showresult() {
                 myresult.innerHTML=`
                 <div class="word">
                 <h3>${input}</h3>
-                <button onclick="playSound" class="play">
+                <button onclick="playSound()" class="play">
                 <i class="fa-solid fa-play"></i>
                 </button>
             </div>
@@ -108,14 +115,18 @@ function showresult() {
                 sound.setAttribute("src", `${data[0].phonetics[0].audio}`);
                 console.log(sound);
             }).catch(error => {
-                throw error;
+                myresult.innerHTML=`<h3 class="error">Sorry pal, we couldn't find definitions for the word you were looking for.</h3>`
               });
         } 
     }
     function playSound(){
-        sound.play();
-    }
+        if (sound.src !== "") {
+            sound.pause();
+            sound.currentTime = 0;
+          }
 
+    sound.play();
+}
 
 
 all_historybtn.addEventListener('click',switchtab);
@@ -127,15 +138,22 @@ function deleteCard(word){
 }
 
 
-function showHistoryCard(word,definition){
+function showHistoryCard(word,definition,example){
     const box=document.createElement('div');
     box.classList.add('box');
 
     box.innerHTML=`
-    <h3>${word}</h3>
+    <h2>${word}</h2>
     <div class="part_of_speech">
     ${definition}
     </div>
+    <br/>
+    <br/>
+    
+    <p class="wordExample">
+    Example: ${example|| "Not Available"}
+    </p>
+
 
     <button  onclick="deleteCard('${word}')" class="delete"><i class="fa-sharp fa-solid fa-trash"></i></button>
     
@@ -146,7 +164,7 @@ function showHistoryCard(word,definition){
 
 
 function showHistory(){
-    console.log(localStorage);
+    // console.log(localStorage);
     history_card.innerHTML='';
     for (var i = 0; i < localStorage.length; ++i) {
 
@@ -154,8 +172,9 @@ function showHistory(){
         
         var value = localStorage.getItem(key);
         const defi=JSON.parse(value).meanings[0].definitions[0].definition;
+        const example=JSON.parse(value).meanings[0].definitions[0].example;
         
-        const card=showHistoryCard(key,defi);
+        const card=showHistoryCard(key,defi,example);
         history_card.appendChild(card);
         }
 }
